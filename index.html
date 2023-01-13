@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+        <title>Viking Animation : Sjef van Leeuwen</title>
+        <style>
+            body {
+                overflow: hidden;
+                margin: 0px;
+            }
+        </style>
+    </head>
+    <style>
+        .bubble {
+  border-radius: 8px;
+  color: white;
+  border: solid 1px;
+  border-color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background: #000000;
+  padding: 4px;
+  font-size: 11px;
+  text-align:center;
+  opacity: 1;
+  vertical-align: bottom;
+  width: 200px;
+  height: 18px;
+}
+.bubble:before {
+    text-align: left;
+    color: rgb(255, 0, 0);
+    content: ' 50%';
+    border-radius: 8px;
+    display: block;
+    background: rgb(0, 255, 157);
+    width: 50%;
+    height: 18px;
+    padding: 4px;
+    opacity: 0.5;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.blurred-box{
+  position: relative;
+  width: 250px;
+  height: 350px;
+  top: calc(50% - 575px);
+  left: calc(50% - 125px);
+  background: inherit;
+  border-radius: 2px;
+  opacity: 0.8;
+  overflow: hidden;
+}
+
+.blurred-box:after{
+ content: '';
+ width: 300px;
+ height: 300px;
+ background: inherit; 
+ position: absolute;
+ left: -25px;
+ right: 0;
+ top: -25px;  
+ bottom: 0;
+ box-shadow: inset 0 0 0 200px rgba(255,255,255,0.05);
+ filter: blur(10px);
+}
+
+
+/* Form which you dont need */
+.user-login-box{
+  position: relative;
+  margin-top: 50px;
+  text-align: center;
+  z-index: 1;
+}
+.user-login-box > *{
+  display: inline-block;
+  width: 200px;
+}
+
+.user-icon{
+  width: 100px;
+  height: 100px;
+  position: relative;
+  border-radius: 50%;
+  background-size: contain;
+  background-image: url(https://pbs.twimg.com/profile_images/725321660484583424/ArQ4fM3k.jpg);
+}
+
+.user-name{
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: white;
+}
+
+input.user-password{
+  width: 120px;
+  height: 18px;
+  opacity: 0.4;
+  border-radius: 2px;
+  padding: 5px 15px;
+  border: 0;
+}
+
+.attachment-weapon {
+  left: 34%;
+  top: 36%;
+}
+
+.attachment {
+  position:absolute;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid grey;
+  cursor: pointer;
+}  
+
+
+.attachment__button-content {
+  position: relative;
+  margin: 10%;
+  height: 80%;
+  width: 80%;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.15s ease,
+    margin 0.15s ease,
+    height 0.15s ease,
+    width 0.15s ease;
+}
+
+.attachment__button-content:hover {
+      margin: 5%;
+      height: 90%;
+      width: 90%;
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+.add-sign-plus {
+  transition: transform 0.2s ease;
+}
+
+.add-sign {
+  color: lightgrey;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: 1.75rem;
+}
+
+.options {
+  transition: opacity 0.2s ease;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.attachment-options-weapon {
+  left: calc(34% - 6.3rem);
+  top: 36%;
+}
+
+.attachment-options {
+  display: flex;
+  position: absolute;
+  height: min-content;
+  width: auto;
+  height: 3rem;
+  cursor: pointer;
+}
+
+.option {
+  position: relative;
+  margin-left: 1px;
+  height: 80%;
+  width: 100%;
+  height: 100%;
+  transition: background-color 0.15s ease,
+    margin 0.15s ease,
+    height 0.15s ease,
+    width 0.15s ease;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid #4e4e4e;
+  
+
+}
+
+.option:hover {
+    opacity: 1;
+}
+
+.tip {
+  position: absolute;
+  left: 50%;
+  top: 1rem;
+  transform: translateX(-50%);
+  text-transform: uppercase;
+  font-family: sans-serif;
+  font-weight: 600;
+  opacity: 0.35;
+  font-size: 0.75rem;
+}
+
+@font-face {
+    font-family: "pixelmix";
+    src: url("pixelmix.woff") format('woff');
+}
+    </style>
+<!-- <div class="hidden">
+  <input id=audiofile type=file>
+  <div id="audio_box"></div>
+</div> -->
+
+  <!-- <div id="player">
+    <div class="visor">
+      <div class="time">
+        <span class="current">0:00</span>
+        <span class="duration">0:00</span>
+      </div>
+      <div class="info">
+        <div class="track">Artist - Song Title</div>
+        <div class="status">
+          <span></span>
+          <span>128 KBPS</span>
+          <span>44 KHZ</span>
+          <span><i class="zmdi zmdi-surround-sound"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="controls">
+      <button class="open-button" alt="open">
+          <i class="zmdi zmdi-eject"></i>
+        </button>
+      <button class="play-button" alt="play">
+          <i class="zmdi zmdi-play"></i>
+        </button>
+        <button class="pause-button" alt="pause">
+          <i class="zmdi zmdi-pause"></i>
+        </button>
+      <button class="repeat-button" alt="repeat" title="repeat">
+          <i class="zmdi zmdi-repeat"></i>
+        </button>
+    </div>
+    <div class="analyser">
+      <canvas id="analyser_render"></canvas>
+    </div>
+  </div> -->
+
+  <!-- <div class="themes">
+    <div class="radio">
+      <input id="radio-1" name="radio" type="radio" value="0" checked>
+      <label for="radio-1" class="radio-label">Night</label>
+    </div>
+
+    <div class="radio">
+      <input id="radio-2" name="radio" type="radio" value="1">
+      <label  for="radio-2" class="radio-label">Fire</label>
+    </div>
+
+    <div class="radio">
+      <input id="radio-3" name="radio" type="radio" value="2">
+      <label for="radio-3" class="radio-label">Classic</label>
+    </div>
+  </div> -->
+
+
+        <div class="attachment attachment-weapon" style="visibility: hidden">
+            <div class="attachment__button-content">
+              <div class="add-sign">
+                <div class="add-sign-plus add-sign-weapon">
+                  +
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="options weapon-options">
+            <div class="attachment-options attachment-options-weapon">
+              <div class="option" onclick="applyWeapon(0)">
+              <svg class="axe-svg" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 20"><path d="M7 1a1 1 0 112 0v18a1 1 0 11-2 0V1z" fill="#fff"/><path fill-rule="evenodd" clip-rule="evenodd" d="M14.5 2.618a.5.5 0 00-.724-.447L9.275 4.42a.5.5 0 00.048.916l4.501 1.688a.5.5 0 00.676-.468V2.618zm-1.17-1.342a1.5 1.5 0 012.17 1.342v3.939a1.5 1.5 0 01-2.027 1.404L8.972 6.273c-1.227-.46-1.316-2.16-.144-2.746l4.501-2.25z" fill="#fff"/><path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 2.618a.5.5 0 01.724-.447l4.501 2.25a.5.5 0 01-.048.916L2.176 7.025a.5.5 0 01-.676-.468V2.618zm1.17-1.342A1.5 1.5 0 00.5 2.618v3.939a1.5 1.5 0 002.027 1.404l4.501-1.688c1.227-.46 1.316-2.16.144-2.746l-4.501-2.25z" fill="#fff"/></svg>
+              
+              </div>
+              <div class="option" onclick="applyWeapon(1)">
+              <svg class="sword-svg" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.5 6.382V16.5h-5V6.378c.56-1.389 1.049-2.392 1.493-3.043.474-.695.795-.838.976-.835.19.003.52.168 1.005.87.453.657.951 1.654 1.526 3.012zm-3 12.118h1V21a.5.5 0 01-1 0v-2.5z" stroke="#fff"/></svg></div>
+            </div>
+          </div>
+
+        <img src="textures/logo.svg" style="bottom: 50px; right:50px; position:absolute" />
+        <script type="module" src="bundle.js"></script>
+        <div  style="visibility: hidden;width:0px;height:0px">
+            <!-- <iframe style="visibility: hidden;" src="https://www.free-stock-music.com/music/alexander-nakarada-prepare-for-war.mp3" allow="autoplay" width="0px" height="0px"></iframe> -->
+        </div>
+    </body>
+</html>
